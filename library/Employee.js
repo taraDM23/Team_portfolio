@@ -22,3 +22,4 @@ module.exports = class Employee {
     return this.constructor.name;
   }
 }
+
