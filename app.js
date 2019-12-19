@@ -9,7 +9,7 @@ const Intern = require("./Library/Intern");
 
 
 //================CLI prompts===============================
-module.exports = class Main {
+class Main {
 
   constructor() {
     this.team = [];
@@ -95,3 +95,4 @@ module.exports = class Main {
   }
 }
 
+module.exports = Main;
