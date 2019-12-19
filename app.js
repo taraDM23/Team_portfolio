@@ -2,8 +2,13 @@ const inquirer = require("inquirer");
 const fs = require("fs");
 const util = require("util");
 const writeFileAsync = util.promisify(fs.writeFile);
+const Engineer = require("./Library/Engineer");
+const Manager = require("./Library/Manager");
+const Intern = require("./Library/Intern");
 
 
+
+//================CLI prompts===============================
 module.exports = class Main {
 
   constructor() {
@@ -25,19 +30,24 @@ module.exports = class Main {
           message: "Enter Employee Name"
         },
         {
-          type: "list",
-          name: "role",
-          message: "Choose Employee position",
-          choices: [
-            "Engineer",
-            "Manager",
-            "Intern"
-          ]
+          type: "input",
+          name: "id",
+          message: "Enter Employee Identification number"
         },
         {
           type: "input",
           name: "email",
           message: "Enter Employee email address",
+        },
+        {
+          type: "list",
+          name: "role",
+          message: "Select Employee position",
+          choices: [
+            "Engineer",
+            "Manager",
+            "Intern"
+          ]
         },
         {
           type: "input",
@@ -58,9 +68,30 @@ module.exports = class Main {
           when: ({ role }) => role === "Intern"
         }
       ]);
-      this.team.push(response)
-      console.log(this.team);
+
+    //obj construct
+      const {
+        name,
+        id,
+        role,
+        email,
+        github,
+        school,
+        officeNumber
+      } = response
+
+      if (role === "Engineer") {
+        this.team.push(new Engineer(name, id , email, github ));
+      }
+      if (role === "Manager") {
+        this.team.push(new Manager(name, id, email , officeNumber));
+      }
+
+      if (role === "Intern") {
+        this.team.push(new Intern(name, id , email,  school));
+      }
     }
+    console.log(this.team);
   }
 }
 

@@ -1,12 +1,9 @@
-//const empId = require("id");
-
 module.exports = class Employee {
-  constructor(name, id, email, title) {
+  constructor(name, id, email, role) {
     this.id = id;
-    //empId.generate();
     this.name = name;
     this.email = email;
-    this.title = title;
+    this.role = role;
   }
 
   getId() {

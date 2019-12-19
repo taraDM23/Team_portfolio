@@ -1,4 +1,4 @@
-const Employee = require('./Employee');
+const Employee = require("./Employee");
 
 module.exports = class Manager extends Employee {
   constructor(name,  id , email, officeNumber) {
