@@ -22,16 +22,21 @@ class Main {
       HTMLPort += Employee.generateHTML();
       console.log(HTMLPort)
     }
-
-    /* const template1 = await readFilePromise("./main.html", "utf-8");
+    
+    const template1 = await readFilePromise("./templates/bodyStart.html", "utf-8");
     console.log("read main")
-
-    const template2 = await readFilePromise("./main2.html", "utf-8");
-    console.log("read main2") */
-
-    const result = Main.bodyStart + HTMLPort + Main.bodyEnd;
+    const template2 = await readFilePromise("./templates/bodyEnd.html", "utf-8");
+    console.log("read main2") 
+    const result = template1 + HTMLPort + template2;
     await writeFileAsync(path.resolve(__dirname, "Team_Summary.html"), result);
     console.log("Creating Summary")
+    
+
+/*     const result = Main.bodyStart + HTMLPort + Main.bodyEnd;
+    await writeFileAsync(path.resolve(__dirname, "Team_Summary.html"), result); */
+
+    console.log("Creating Summary")
+
   }
   catch(err) {
     console.log(err)
