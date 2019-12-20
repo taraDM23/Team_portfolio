@@ -145,13 +145,21 @@ Main.bodyStart = `
             padding-right: 7px;
             padding-bottom: 10px;
         }
+
+        .card-footer {
+            background-color:#0072ce;
+        }
+
+        #Header {
+            background-color:#0072ce;
+        }
     </style>
     <title>Team Summary</title>
 </head>
 
 <body>
     <div class="card text-center" id="Canvas">
-        <div class="card-header">
+        <div class="card-header" id="Header">
             <h5 class="card-title">Team Summary</h5>
         </div>
         <div class="card-body">
@@ -162,8 +170,7 @@ Main.bodyStart = `
 Main.bodyEnd = `
 
        </div>
-        <div class="card-footer text-muted">
-            Footer
+        <div class="card-footer text-muted">           
         </div>
     </div>
 

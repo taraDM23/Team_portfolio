@@ -18,9 +18,9 @@ module.exports = class Manager extends Employee {
             <h6>Manager</h6><img class="icon" src="https://image.flaticon.com/icons/png/512/993/993723.png" alt="..." />
         </div>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item"> ID - ${this.id}</li>
-            <li class="list-group-item"> Email - <a href="mailto:${this.email}">${this.email}</a></li>
-            <li class="list-group-item"> Github - ${this.officeNumber}</li>
+            <li class="list-group-item"> ID:  ${this.id}</li>
+            <li class="list-group-item"> Email: <a href="mailto:${this.email}">${this.email}</a></li>
+            <li class="list-group-item"> Office Number: - ${this.officeNumber}</li>
         </ul>
       </div>
    
