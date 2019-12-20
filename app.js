@@ -30,7 +30,7 @@ class Main {
     console.log("read main2") */
 
     const result = Main.bodyStart + HTMLPort + Main.bodyEnd;
-    await writeFileAsync(path.resolve(__dirname, 'Team_Summary.html'), result);
+    await writeFileAsync(path.resolve(__dirname, "Team_Summary.html"), result);
     console.log("Creating Summary")
   }
   catch(err) {
