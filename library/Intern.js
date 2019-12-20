@@ -11,19 +11,19 @@ module.exports = class Intern extends Employee {
 
   generateHTML() {
     return `
-    <div class="card-body">
-      <div class="card" style="width: 18rem;" id="Employee">
+    
+      <div class="card" style="width: 16rem;" id="Employee">
         <div class="card-header">
             ${this.name}
-            Engineer
+            <h6>Intern</h6><img class="icon" src="https://image.flaticon.com/icons/png/512/2038/2038385.png" alt="..." />
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item"> ID - ${this.id}</li>
-            <li class="list-group-item"> Email - ${this.email}</li>
+            <li class="list-group-item"> Email - <a href="mailto:${this.email}">${this.email}</a></li>
             <li class="list-group-item"> Github - ${this.school}</li>
         </ul>
       </div>
-    </div> 
+    
     `
   }
 }

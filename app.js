@@ -136,6 +136,14 @@ Main.bodyStart = `
         
         .card:not(:last-child) {
             margin-right: 20px;
+            margin-bottom: 10px;
+        }
+
+        .icon {
+            width: 50px;
+            height:50px;
+            padding-right: 7px;
+            padding-bottom: 10px;
         }
     </style>
     <title>Team Summary</title>
@@ -146,13 +154,14 @@ Main.bodyStart = `
         <div class="card-header">
             <h5 class="card-title">Team Summary</h5>
         </div>
+        <div class="card-body">
 
         
 `;
 
 Main.bodyEnd = `
 
-       
+       </div>
         <div class="card-footer text-muted">
             Footer
         </div>
