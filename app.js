@@ -16,7 +16,28 @@ class Main {
     this.team = [];
   }
 
-  async run() {
+  async generateHTML() {
+    let HTMLPort = '';
+    for (const Employee of this.team) {
+      HTMLPort += Employee.generateHTML();
+      console.log(HTMLPort)
+    }
+
+    /* const template1 = await readFilePromise("./main.html", "utf-8");
+    console.log("read main")
+
+    const template2 = await readFilePromise("./main2.html", "utf-8");
+    console.log("read main2") */
+
+    const result = Main.bodyStart + HTMLPort + Main.bodyEnd;
+    await writeFileAsync(path.resolve(__dirname, 'Team_Summary.html'), result);
+    console.log("Creating Summary")
+  }
+  catch(err) {
+    console.log(err)
+  }
+
+  async prompts() {
     const { teamSize } = await inquirer.prompt([{
       type: "input",
       name: "teamSize",
@@ -94,32 +115,11 @@ class Main {
       }
     }
     console.log(this.team);
-
-  }
-
-  async generateHTML() {
-    let HTMLPort = '';
-    for (const Employee of this.team) {
-      HTMLPort += Employee.generateHTML();
-      console.log(HTMLPort)
-    }
-
-    /* const template1 = await readFilePromise("./main.html", "utf-8");
-    console.log("read main")
-
-    const template2 = await readFilePromise("./main2.html", "utf-8");
-    console.log("read main2") */
-
-    const result = template1 + HTMLPort + template2;
-    await writeFileAsync(path.resolve(__dirname, 'Team_Summary.html'), result);
-    console.log("Creating Summary")
-  }
-  catch(err) {
-    console.log(err)
+    await this.generateHTML();
   }
 }
 
-Main.template1 = `
+Main.bodyStart = `
 <!DOCTYPE html>
 <html lang="en">
 
@@ -129,12 +129,12 @@ Main.template1 = `
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
-        #Employee {
+        .card {
             display: flex;
             float: left;
         }
         
-        #Employee:not(:last-child) {
+        .card:not(:last-child) {
             margin-right: 20px;
         }
     </style>
@@ -147,12 +147,12 @@ Main.template1 = `
             <h5 class="card-title">Team Summary</h5>
         </div>
 
-        <div class="card-body">
-`
+        
+`;
 
-Main.template2 = `
+Main.bodyEnd = `
 
-        </div> 
+       
         <div class="card-footer text-muted">
             Footer
         </div>
