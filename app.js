@@ -1,6 +1,7 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 const util = require("util");
+const path = require('path');
 const readFilePromise = util.promisify(fs.readFile);
 const writeFileAsync = util.promisify(fs.writeFile);
 const Engineer = require("./Library/Engineer");
@@ -13,20 +14,6 @@ class Main {
 
   constructor() {
     this.team = [];
-  }
-
-  async generateHTML() {
-    let HTMLPort = '';
-    for (const Employee of this.team) {
-      HTMLPort += Employee.generateHTML();
-      console.log(HTMLPort)
-    }
-
-    const template1 = await readFilePromise("./main.html", "utf-8");
-    const template2 = await readFilePromise("./main2.html", "utf-8");
-    const result = template1 + HTMLPort + template2;
-    await writeFileAsync(path.resolve(__dirname, 'Team_Summary.html'), result);
-    console.log("Creating Summary")
   }
 
   async run() {
@@ -109,8 +96,79 @@ class Main {
     console.log(this.team);
 
   }
+
+  async generateHTML() {
+    let HTMLPort = '';
+    for (const Employee of this.team) {
+      HTMLPort += Employee.generateHTML();
+      console.log(HTMLPort)
+    }
+
+    /* const template1 = await readFilePromise("./main.html", "utf-8");
+    console.log("read main")
+
+    const template2 = await readFilePromise("./main2.html", "utf-8");
+    console.log("read main2") */
+
+    const result = template1 + HTMLPort + template2;
+    await writeFileAsync(path.resolve(__dirname, 'Team_Summary.html'), result);
+    console.log("Creating Summary")
+  }
+  catch(err) {
+    console.log(err)
+  }
 }
 
+Main.template1 = `
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        #Employee {
+            display: flex;
+            float: left;
+        }
+        
+        #Employee:not(:last-child) {
+            margin-right: 20px;
+        }
+    </style>
+    <title>Team Summary</title>
+</head>
+
+<body>
+    <div class="card text-center" id="Canvas">
+        <div class="card-header">
+            <h5 class="card-title">Team Summary</h5>
+        </div>
+
+        <div class="card-body">
+`
+
+Main.template2 = `
+
+        </div> 
+        <div class="card-footer text-muted">
+            Footer
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/85711ad931.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
+
+
+
+`
 module.exports = Main;
 
 
