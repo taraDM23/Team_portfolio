@@ -1,11 +1,11 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 const util = require("util");
+const readFilePromise = util.promisify(fs.readFile);
 const writeFileAsync = util.promisify(fs.writeFile);
 const Engineer = require("./Library/Engineer");
 const Manager = require("./Library/Manager");
 const Intern = require("./Library/Intern");
-
 
 
 //================CLI prompts===============================
@@ -14,6 +14,21 @@ class Main {
   constructor() {
     this.team = [];
   }
+
+  async generateHTML() {
+    let HTMLPort = '';
+    for (const Employee of this.team) {
+      HTMLPort += Employee.generateHTML();
+      console.log(HTMLPort)
+    }
+
+    const template1 = await readFilePromise("./main.html", "utf-8");
+    const template2 = await readFilePromise("./main2.html", "utf-8");
+    const result = template1 + HTMLPort + template2;
+    await writeFileAsync(path.resolve(__dirname, 'Team_Summary.html'), result);
+    console.log("Creating Summary")
+  }
+
   async run() {
     const { teamSize } = await inquirer.prompt([{
       type: "input",
@@ -69,7 +84,7 @@ class Main {
         }
       ]);
 
-    //obj construct
+      //obj construct
       const {
         name,
         id,
@@ -81,18 +96,21 @@ class Main {
       } = response
 
       if (role === "Engineer") {
-        this.team.push(new Engineer(name, id , email, github ));
+        this.team.push(new Engineer(name, id, email, github));
       }
       if (role === "Manager") {
-        this.team.push(new Manager(name, id, email , officeNumber));
+        this.team.push(new Manager(name, id, email, officeNumber));
       }
 
       if (role === "Intern") {
-        this.team.push(new Intern(name, id , email,  school));
+        this.team.push(new Intern(name, id, email, school));
       }
     }
     console.log(this.team);
+
   }
 }
 
 module.exports = Main;
+
+
