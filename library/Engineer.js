@@ -19,8 +19,8 @@ module.exports = class Engineer extends Employee {
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item"> ID: ${this.id}</li>
-          <li class="list-group-item"> Email: <a href="mailto:${this.email}">${this.email}</a></li>
-          <li class="list-group-item"> Github: <a href="https://github.com/+${this.github}">${this.github}</a></li>
+          <li class="list-group-item"> Email: <a href="mailto:${this.email}" target="_blank">${this.email}</a></li>
+          <li class="list-group-item"> Github: <a href="https://github.com/${this.github}" target="_blank">${this.github}</a></li>
 
 
 
